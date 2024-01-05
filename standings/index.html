@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Patrikov's football hub</title>
+    <link rel="stylesheet" type="text/css" href="standings.css" />
+    <link rel="stylesheet" type="text/css" href="../common.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Comforter"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <meta charset="UTF-8" />
+  </head>
+
+  <body>
+    <header>
+      <a href="../landing/landing.html">
+        <h1>Patrikov's football hub</h1>
+      </a>
+      <div id="navigation-bar">
+        <button class="nav-btn" id="username"></button>
+        <button class="nav-btn" id="logout">
+          Изход <i class="fa fa-sign-out"></i>
+        </button>
+      </div>
+    </header>
+    <main>
+      <div id="toast-container"></div>
+      <div class="standings-goalscorers-container">
+        <button id="standings-button" class="highlighted-button">Класиране</button>
+        <button id="goalscorers-button">Голмайстори</button>
+      </div>
+      </div>
+      <div id="standings-container-base" class="card">
+        <h2 id="standings-header"></h2>
+        <div id="standings-helper">
+          <div id="standing-container-nested">
+            <table id="standings">
+              <thead>
+                <tr>
+                  <th onclick="sortTable(0)" id="header0">
+                    Място <span class="sort-indicator"></span>
+                  </th>
+                  <th onclick="sortTable(1)" id="header1">
+                    Наименувание <span class="sort-indicator"></span>
+                  </th>
+                  <th onclick="sortTable(2)" id="header2">
+                    П <span class="sort-indicator"></span>
+                  </th>
+                  <th onclick="sortTable(3)" id="header3">
+                    Р <span class="sort-indicator"></span>
+                  </th>
+                  <th onclick="sortTable(4)" id="header4">
+                    З <span class="sort-indicator"></span>
+                  </th>
+                  <th onclick="sortTable(5)" id="header5">
+                    Вкарани голове <span class="sort-indicator"></span>
+                  </th>
+                  <th onclick="sortTable(6)" id="header6">
+                    Допуснати голове <span class="sort-indicator"></span>
+                  </th>
+                  <th onclick="sortTable(7)" id="header7">
+                    Голова разлика <span class="sort-indicator"></span>
+                  </th>
+                  <th onclick="sortTable(8)" id="header8">
+                    Точки <span class="sort-indicator"></span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="overlay" id="fixtures">
+        <div class="wrapper fixtures-wrapper-color">
+          <h2>Мачове във всички турнири</h2>
+          <a href="#" class="close">&times;</a>
+          <div id="fixtures-container" class="fixtures-container">
+          </div>
+        </div>
+      </div>
+    </main>
+    <script defer src="../common.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

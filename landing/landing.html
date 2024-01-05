@@ -1,0 +1,190 @@
+<html>
+  <head>
+    <title>Patrikov's football hub</title>
+    <link rel="stylesheet" type="text/css" href="landing.css" />
+    <link rel="stylesheet" type="text/css" href="../common.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Comforter"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <header>
+      <a href="../landing/landing.html">
+        <h1>Patrikov's football hub</h1>
+      </a>
+      <div id="navigation-bar">
+        <button class="nav-btn" id="username"></button>
+	      <button class="nav-btn" id="logout">Изход <i class="fa fa-sign-out"></i></button>
+      </div>
+    </header>
+    <main>
+      <div id="about">
+        <div id="container">
+          <h2>Информация за сайта</h2>
+          <hr />
+          <p>
+            <h3>Welcome to Patrikov's football hub!</h3>
+            <p>
+              Are you a die-hard football enthusiast or just casually interested in the game?
+              <br>
+              No matter your level of fanaticism, you're in for a treat! Dive into a world of goals,
+              fouls, triumphs, and heartbreaks as we unravel the latest scores, standings,
+              and thrilling moments from various football leagues across the globe.
+            </p>
+            <p>
+              Whether you're here to check your favorite team's performance or to settle a bet,
+              we've got you covered. From nail-biting derbies to underdog victories,
+              expect a whirlwind of football frenzy!
+            </p>
+          </p>
+        </div>
+      </div>
+      <div id="divider"></div>
+      <div id="actions">
+        <div class="search-league-container-button" id="search-league-container-button">
+        <div class="search-league-container">
+          <div id="dropdown">
+            <div class="list-choice">
+              <div class="list-choice-title">Избери лига</div>
+              <div class="list-choice-objects">
+                <label>
+                  <input
+                    type="radio"
+                    name="premier_league"
+                    id="premier_league"
+                  />
+                  <span>Висша лига (Англия)</span>
+                </label>
+                <label>
+                  <input type="radio" name="la_liga" id="la_liga" />
+                  <span>Ла Лига (Испания)</span>
+                </label>
+                <label>
+                  <input type="radio" name="bundesliga" id="bundesliga" />
+                  <span>Бундеслига (Германия)</span>
+                </label>
+                <label>
+                  <input type="radio" name="seria_a" id="seria_a" />
+                  <span>Серия А (Италия)</span>
+                </label>
+                <label>
+                  <input type="radio" name="ligue_one" id="ligue_one" />
+                  <span>Лига 1 (Франция)</span>
+                </label>
+                <label>
+                  <input type="radio" name="efbet_liga" id="efbet_liga" />
+                  <span>Ефбет лига (България)</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-field">
+            <input type="text" id="league-season" />
+            <label for="league-season">Сезон</label>
+            <span class="error" id="league-season-error"></span>
+          </div>
+        </div>
+        <div class="button-container">
+          <button class="search-button" id="search-button">Търси класиране</button>
+          <div id="toast-container"></div>
+        </div>
+        </div>
+        <div id="login-register">
+          <p>Искаш да намериш информация за дадено първенство?</p>
+          <a href="#login-popup">
+            <button>Влез в профил</button>
+          </a>
+          <p>Нямаш профил?</p>
+          <a href="#registration-popup">
+            <button>Регистрирай се</button>
+          </a>
+          <p style="font-size: 12px;">Абонаментът струва 4.99 лв./месец</p>
+        </div>
+      </div>
+      <div class="overlay" id="registration-popup">
+        <div class="wrapper registration-wrapper-color">
+          <h2>Регистрация</h2>
+          <a href="#" class="close">&times;</a>
+          <form id="register-form">
+            <div class="form-field">
+              <input type="text" id="username-register" />
+              <label title="Това поле е задължително!" for="username-register"
+                >Потребителско име</label
+              >
+              <span class="error" id="username-register-error"></span>
+            </div>
+            <div class="form-field">
+              <input type="text" id="name-register" />
+              <label title="Това поле е задължително!" for="name-register"
+                >Име</label
+              >
+              <span class="error" id="name-register-error"></span>
+            </div>
+            <div class="form-field">
+              <input type="text" id="email-register" />
+              <label title="Това поле е задължително!" for="email-register"
+                >Имейл</label
+              >
+              <span class="error" id="email-register-error"></span>
+            </div>
+            <div class="form-field">
+              <input type="password" id="password-register" />
+              <label title="Това поле е задължително!" for="password-register"
+                >Парола</label
+              >
+              <span class="error" id="password-register-error"></span>
+            </div>
+            <div class="form-field">
+              <input type="password" id="copy-password-register" />
+              <label
+                title="Това поле е задължително!"
+                for="copy-password-register"
+                >Повтори парола</label
+              >
+              <span class="error" id="copy-password-register-error"></span>
+            </div>
+                        
+            <input type="submit" id="submit" value="Регистрирай ме!" />
+          </form>
+          <p class="login-text">
+            Вече имаш профил? <a href="#login-popup">Влез!</a>
+          </p>
+        </div>
+      </div>
+      <div class="overlay" id="login-popup">
+        <div class="wrapper login-wrapper-color">
+          <h2>Вход</h2>
+          <a href="#" class="close">&times;</a>
+          <form id="login-form">
+            <div class="form-field">
+              <input type="text" id="username-login" />
+              <label title="Това поле е задължително!" for="username-login"
+                >Потребителско име</label
+              >
+            </div>
+            <div class="form-field">
+              <input type="password" id="password-login" />
+              <label title="Това поле е задължително!" for="password-login"
+                >Парола</label
+              >
+            </div>
+            <span class="error" id="login-error"></span>
+            <input type="submit" id="submit" value="Влез!" />
+          </form>
+          <p class="register-text">
+            Нямаш профил? <a href="#registration-popup">Регистрирай се!</a>
+          </p>
+        </div>
+      </div>
+    </main>
+  </body>
+  <script defer src="../common.js"></script>
+  <script defer src="landing.js"></script>
+</html>
