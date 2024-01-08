@@ -150,7 +150,41 @@
               >
               <span class="error" id="copy-password-register-error"></span>
             </div>
-            <a href="process_payment.php">Pay with PayPal</a>
+            <!-- Include Stripe.js -->
+<script src="https://js.stripe.com/v3/"></script>
+
+<!-- This could be a button or link -->
+<button id="checkout-button">Pay with Stripe</button>
+
+<!-- Script to handle the payment process -->
+<script>
+  var stripe = Stripe('ca_FkyHCg7X8mlvCUdMDao4mMxagUfhIwXb');
+  var checkoutButton = document.getElementById('checkout-button');
+
+  checkoutButton.addEventListener('click', function() {
+    // Call your server to create a Checkout Session
+    fetch('/create-checkout-session.php', {
+      method: 'POST',
+    })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(session) {
+      // Redirect to Stripe Checkout
+      return stripe.redirectToCheckout({ sessionId: session.id });
+    })
+    .then(function(result) {
+      if (result.error) {
+        // Handle any errors that might occur during redirect to Stripe Checkout
+        console.error(result.error.message);
+      }
+    })
+    .catch(function(error) {
+      console.error('Error:', error);
+    });
+  });
+</script>
+
             <input type="submit" id="submit" value="Регистрирай ме!" />
           </form>
           <p class="login-text">

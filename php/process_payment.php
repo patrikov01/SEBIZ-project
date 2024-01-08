@@ -1,52 +1,33 @@
 <?php
-// Set up PayPal API credentials
-$client_id = 'YOUR_SANDBOX_CLIENT_ID';
-$client_secret = 'YOUR_SANDBOX_CLIENT_SECRET';
-$base_url = 'https://api.sandbox.paypal.com';
+require_once('vendor/autoload.php'); // Include Stripe PHP library
 
-// Set up payment data
-$data = [
-    'intent' => 'sale',
-    'payer' => [
-        'payment_method' => 'paypal'
+\Stripe\Stripe::setApiKey('ca_FkyHCg7X8mlvCUdMDao4mMxagUfhIwXb'); // Set your secret key
+
+header('Content-Type: application/json');
+
+try {
+  // Create a new Checkout Session
+  $session = \Stripe\Checkout\Session::create([
+    'payment_method_types' => ['card'],
+    'line_items' => [
+      [
+        'price_data' => [
+          'currency' => 'usd',
+          'product_data' => [
+            'name' => 'Your Product',
+          ],
+          'unit_amount' => 499, // Amount in cents
+        ],
+        'quantity' => 1,
+      ],
     ],
-    'redirect_urls' => [
-        'return_url' => 'http://yourwebsite.com/payment_success.php',
-        'cancel_url' => 'http://yourwebsite.com/payment_cancel.php'
-    ],
-    'transactions' => [
-        [
-            'amount' => [
-                'total' => '10.00', // Replace with your desired amount
-                'currency' => 'USD' // Replace with your desired currency
-            ],
-            'description' => 'Payment for services'
-        ]
-    ]
-];
+    'mode' => 'payment',
+    'success_url' => 'http://yourwebsite.com/payment_success.html',
+    'cancel_url' => 'http://yourwebsite.com/payment_cancel.html',
+  ]);
 
-// Prepare API request headers
-$headers = [
-    'Content-Type: application/json',
-    'Authorization: Basic ' . base64_encode("$client_id:$client_secret")
-];
-
-// Initiate cURL to create payment
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, $base_url . '/v1/payments/payment');
-curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-// Execute cURL and get response
-$response = curl_exec($ch);
-curl_close($ch);
-
-// Decode the response
-$payment = json_decode($response);
-
-// Redirect to PayPal for payment approval
-header('Location: ' . $payment->links[1]->href);
-exit;
+  echo json_encode(['id' => $session->id]);
+} catch (Exception $e) {
+  echo json_encode(['error' => $e->getMessage()]);
+}
 ?>
