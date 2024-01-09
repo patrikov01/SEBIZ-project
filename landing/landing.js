@@ -133,8 +133,8 @@ function register(username, name, email, password, confirmPassword) {
     .then(async ({ status, json }) => {
       if (status === 201) {
         const isLoggedIn = await checkLogin()
-        window.location.href =
-          "http://localhost/football/landing/landing.html"
+      //  window.location.href =
+         // "http://localhost/football/landing/landing.html"
       } else if (status === 400) {
         if (json["error_field"] === "username") {
           setInvalidField(
