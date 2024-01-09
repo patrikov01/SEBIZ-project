@@ -12,7 +12,10 @@ $sql = "CREATE TABLE IF NOT EXISTS users (
     username VARCHAR(255) NOT NULL UNIQUE,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
-    password_hash VARCHAR(255) NOT NULL
+    password_hash VARCHAR(255) NOT NULL,
+    card_number VARCHAR(255) NOT NULL,
+    expiry_date VARCHAR(255) NOT NULL,
+    cvv VARCHAR(255) NOT NULL
 )";
 
 if ($conn->query($sql) === TRUE) {

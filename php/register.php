@@ -23,10 +23,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $email = $data['email'];
   $password = $data['password'];
   $confirmPassword = $data['confirmPassword'];
+  $cardNumber = $data['cardNumber']; 
+  $expiryDate = $data['expiryDate']; 
+  $cvv = $data['cvv']; 
 
   $response = array();
 
-  if (empty($username) || empty($name) || empty($email) || empty($password) || empty($confirmPassword)) {
+  if (empty($username) || empty($name) || empty($email) || empty($password) || empty($confirmPassword) || empty($cardNumber) || empty($expiryDate) || empty($cvv)) {
     http_response_code(400);
     $response['error'] = 'Всички полета са задължителни!';
     echo json_encode($response);

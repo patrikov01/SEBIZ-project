@@ -111,7 +111,7 @@ function login(username, password, errorLabel) {
     })
 }
 
-function register(username, name, email, password, confirmPassword) {
+function register(username, name, email, password, confirmPassword, cardNumber, expiryDate, cvv) {
   fetch("http://localhost/football/php/register.php", {
     method: "POST",
     headers: {
@@ -123,6 +123,9 @@ function register(username, name, email, password, confirmPassword) {
       email: email,
       password: password,
       confirmPassword: confirmPassword,
+      cardNumber: cardNumber,
+      expiryDate: expiryDate,
+      cvv: cvv
     }),
   })
     .then(async (response) => {
@@ -167,8 +170,8 @@ document
 
     if (validatedInputs) {
       console.log(validatedInputs)
-      var [username, name, email, password, confirmPassword] = validatedInputs
-      register(username, name, email, password, confirmPassword)
+      var [username, name, email, password, confirmPassword, cardNumber, expiryDate, cvv] = validatedInputs
+      register(username, name, email, password, confirmPassword, cardNumber, expiryDate, cvv)
     }
   })
 
@@ -281,6 +284,80 @@ function validateForm() {
       "Паролата не съответства с въведената по-горе!",
       function (value1, value2) {
         return value1 === value2
+      },
+      validInputs
+    ) && isValid
+  
+    isValid =
+    validateField(
+      "number-register",
+      "number-register-error",
+      "Невалиден номер на карта!",
+      function (cardNumber) {
+         // Remove spaces and dashes from the card number
+  cardNumber = cardNumber.replace(/[\s-]/g, '');
+
+  // Check if the card number contains only digits and has a valid length (typically 13-19 digits)
+  if (!/^\d{13,19}$/.test(cardNumber)) {
+    return false;
+  }
+
+  // Use Luhn algorithm to validate the card number
+  let checksum = 0;
+  for (let i = cardNumber.length - 1; i >= 0; i--) {
+    let digit = parseInt(cardNumber.charAt(i), 10);
+    if ((cardNumber.length - i) % 2 === 0) {
+      digit *= 2;
+      if (digit > 9) {
+        digit -= 9;
+      }
+    }
+    checksum += digit;
+  }
+
+  return checksum % 10 === 0;
+      },
+      validInputs
+    ) && isValid
+    
+    isValid =
+    validateField(
+      "expiry-register",
+      "expiry-register-error",
+      "Валидността трябва да е в този формат: (MM/YY)",
+      function (expiryDate) {
+        // Assuming expiryDate is in MM/YYYY format
+  const [month, year] = expiryDate.split('/').map(val => parseInt(val));
+
+  // Check if month and year are valid numbers
+  if (isNaN(month) || isNaN(year)) {
+    return false;
+  }
+
+  // Get the current date
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear() % 100; // Get last two digits of the current year
+  const currentMonth = currentDate.getMonth() + 1; // getMonth() returns zero-based month
+
+  // Validate year and month
+  if (year < currentYear || (year === currentYear && month < currentMonth)) {
+    return false; // Expiry date is in the past
+  }
+
+  return true; // Expiry date is valid
+      },
+      validInputs
+    ) && isValid
+  
+    isValid =
+    validateField(
+      "cvv-register",
+      "cvv-register-error",
+      "CVV кодът не е валиден",
+      function (cvv) {
+        // Check if CVV is a 3 or 4 digit number
+  const cvvRegex = /^[0-9]{3,4}$/;
+  return cvvRegex.test(cvv);
       },
       validInputs
     ) && isValid
