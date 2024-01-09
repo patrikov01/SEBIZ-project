@@ -379,6 +379,7 @@ function validateField(
   var fieldInput = document.getElementById(fieldId)
   var errorElement = document.getElementById(errorId)
   var fieldValue = fieldInput.value
+  console.log(fieldValue)
 
   if (fieldValue.length === 0) {
     fieldInput.classList.add("invalid")
