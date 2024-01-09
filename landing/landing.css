@@ -245,6 +245,8 @@ button:hover {
 
 form {
   display: flex;
+  overflow-y: scroll;
+  height: 500px;
   flex-direction: column;
 }
 
