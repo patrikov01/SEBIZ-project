@@ -1,7 +1,7 @@
 <?php
 require_once('vendor/autoload.php'); // Include Stripe PHP library
 
-\Stripe\Stripe::setApiKey('ca_FkyHCg7X8mlvCUdMDao4mMxagUfhIwXb'); // Set your secret key
+\Stripe\Stripe::setApiKey('sk_test_51OWlyoHkveMnlLCoJO75gBd8zv5erxijENxRHxpX1LlRf3pvDR0ayPoLUULppoLQcq2O3uTlw1Nb9A9KClMJST1O00rtFXbOPf'); // Set your secret key
 
 header('Content-Type: application/json');
 
@@ -22,8 +22,8 @@ try {
       ],
     ],
     'mode' => 'payment',
-    'success_url' => 'http://yourwebsite.com/payment_success.html',
-    'cancel_url' => 'http://yourwebsite.com/payment_cancel.html',
+    'success_url' => 'http://localhost/football/landing/landing.html#registration-popup?success=yes',
+    'cancel_url' => 'http://localhost/football/landing/landing.html#registration-popup?success=no',
   ]);
 
   echo json_encode(['id' => $session->id]);
