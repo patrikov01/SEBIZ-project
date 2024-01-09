@@ -1,7 +1,7 @@
 <?php
 require_once('vendor/autoload.php'); // Include Stripe PHP library
 
-\Stripe\Stripe::setApiKey('sk_test_51OWlyoHkveMnlLCoJO75gBd8zv5erxijENxRHxpX1LlRf3pvDR0ayPoLUULppoLQcq2O3uTlw1Nb9A9KClMJST1O00rtFXbOPf'); // Set your secret key
+\Stripe\Stripe::setApiKey('pk_test_51OWlyoHkveMnlLCoaQdBpI5tNfyOq2ZXKQCXTNUpqTpw5KsAuDVIMCRg2YbVEOAXxHubQKDaAlZn0qv8VlSGrSKh00zUjvhVgj'); // Set your secret key
 
 header('Content-Type: application/json');
 
