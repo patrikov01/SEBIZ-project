@@ -89,8 +89,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-  $stmt = $conn->prepare("INSERT INTO users (username, name, email, password_hash) VALUES (?, ?, ?, ?)");
-  $stmt->bind_param("ssss", $username, $name, $email, $hashedPassword);
+  $stmt = $conn->prepare("INSERT INTO users (username, name, email, password_hash, card_number, expiry_date, cvv) VALUES (?, ?, ?, ?, ?, ?, ?)");
+  $stmt->bind_param("sssssss", $username, $name, $email, $hashedPassword, $cardNumber, $expiryDate, $cvv);
   if ($stmt->execute()) {
     http_response_code(201);
     $_SESSION['username'] = $username;
