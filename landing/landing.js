@@ -227,7 +227,6 @@ function resetInputFields() {
 }
 
 function validateForm() {
-  console.log("MESSAGE")
   var isValid = true
   var validInputs = []
 
