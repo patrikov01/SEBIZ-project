@@ -472,46 +472,30 @@ document.getElementById("search-button").addEventListener("click", (event) => {
 
 // Add an event listener for the "Change Username" button
 document.getElementById("username-change").addEventListener("click", function () {
-  // Prompt the user for a new username
-  const newUsername = prompt("Enter your new username:");
+  // Display the modal
+  document.getElementById("myModal").style.display = "block";
+});
+
+// Add an event listener for the modal close button
+document.getElementById("closeModal").addEventListener("click", function () {
+  // Close the modal
+  document.getElementById("myModal").style.display = "none";
+});
+
+// Add an event listener for the "Submit" button in the modal
+document.getElementById("submitUsername").addEventListener("click", function () {
+  // Get the new username from the input field
+  const newUsername = document.getElementById("newUsername").value;
 
   // Check if the user entered a new username
-  if (newUsername !== null && newUsername !== "") {
+  if (newUsername.trim() !== "") {
     // Call a function to update the username in the database
     updateUsername(newUsername);
+
+    // Close the modal
+    document.getElementById("myModal").style.display = "none";
+  } else {
+    alert("Please enter a valid username.");
   }
 });
 
-// Function to update the username in the database
-function updateUsername(newUsername) {
-  // Make a fetch request to the server to update the username
-  fetch("http://localhost/football/php/update-username.php", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      newUsername: newUsername,
-    }),
-  })
-    .then(async (response) => {
-      const status = response.status;
-      const json = await response.json();
-      return { status, json };
-    })
-    .then(({ status, json }) => {
-      if (status === 200) {
-        // Update the username display on the page
-        document.getElementById("username").textContent = newUsername;
-        alert("Username updated successfully");
-      } else {
-        // Handle errors, display a message, or log the error
-        console.error("Error updating username:", json.error);
-        alert("Error updating username. Please try again.");
-      }
-    })
-    .catch((error) => {
-      console.error("Fetch error:", error);
-      alert("Fetch error. Please try again.");
-    });
-}
