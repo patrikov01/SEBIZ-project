@@ -503,13 +503,15 @@ function updateUsername(newUsername) {
       if (status === 200) {
         // Update the username display on the page
         document.getElementById("username").textContent = newUsername;
+        alert("Username updated successfully");
       } else {
         // Handle errors, display a message, or log the error
         console.error("Error updating username:", json.error);
+        alert("Error updating username. Please try again.");
       }
     })
     .catch((error) => {
       console.error("Fetch error:", error);
+      alert("Fetch error. Please try again.");
     });
 }
-
