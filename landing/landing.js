@@ -507,5 +507,9 @@ function updateUsername(newUsername) {
         // Handle errors, display a message, or log the error
         console.error("Error updating username:", json.error);
       }
+    })
+    .catch((error) => {
+      console.error("Fetch error:", error);
     });
 }
+
