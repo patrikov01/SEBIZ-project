@@ -482,7 +482,6 @@ document.getElementById("closeModal").addEventListener("click", function () {
   document.getElementById("myModal").style.display = "none";
 });
 
-// Add an event listener for the "Submit" button in the modal
 document.getElementById("submitUsername").addEventListener("click", function () {
   // Get the new username from the input field
   const newUsername = document.getElementById("newUsername").value;
@@ -499,3 +498,30 @@ document.getElementById("submitUsername").addEventListener("click", function () 
   }
 });
 
+
+function updateUsername(newUsername) {
+  // Make a fetch request to the server to update the username
+  fetch("http://localhost/football/php/update-username.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      newUsername: newUsername,
+    }),
+  })
+    .then(async (response) => {
+      const status = response.status;
+      const json = await response.json();
+      return { status, json };
+    })
+    .then(({ status, json }) => {
+      if (status === 200) {
+        // Update the username display on the page
+        document.getElementById("username").textContent = newUsername;
+      } else {
+        // Handle errors, display a message, or log the error
+        console.error("Error updating username:", json.error);
+      }
+    });
+}
